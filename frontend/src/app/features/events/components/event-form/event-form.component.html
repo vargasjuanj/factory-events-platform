@@ -1,0 +1,100 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Identificador único (eventId)</mat-label>
+    <input
+      matInput
+      formControlName="eventId"
+      placeholder="Ej: EVT-6061"
+      maxlength="8"
+      (input)="onEventIdInput($event)"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="generateSampleId()"
+      matTooltip="Generar ID aleatorio"
+    >
+      <mat-icon>casino</mat-icon>
+    </button>
+    <mat-error>El identificador es obligatorio (formato: EVT-####).</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tipo de Evento (eventType)</mat-label>
+    <mat-select formControlName="eventType">
+      <mat-option value="PRODUCTION">PRODUCTION</mat-option>
+      <mat-option value="QUALITY">QUALITY (Genera Auditoría)</mat-option>
+    </mat-select>
+    <mat-error>El tipo de evento es obligatorio.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha y Hora</mat-label>
+    <input
+      #dateInput
+      matInput
+      type="datetime-local"
+      step="1"
+      formControlName="timestamp"
+      (click)="dateInput.showPicker()"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="dateInput.showPicker()"
+      matTooltip="Abrir calendario"
+    >
+      <mat-icon>event</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="setCurrentTimestamp()"
+      matTooltip="Usar hora actual"
+    >
+      <mat-icon>schedule</mat-icon>
+    </button>
+    <mat-error>La fecha y hora son obligatorias.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descripción del Evento</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      rows="3"
+      maxlength="500"
+      placeholder="Ej: Inicio de línea de producción o control térmico..."
+      (input)="onDescriptionInput($event)"
+    ></textarea>
+    <mat-error>La descripción es obligatoria (mínimo 3 caracteres).</mat-error>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-btn"
+      [disabled]="isSubmitting"
+    >
+      <mat-icon>save</mat-icon>
+      {{ isSubmitting ? 'Guardando...' : 'Registrar' }}
+    </button>
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="resetForm()"
+      [disabled]="isSubmitting"
+    >
+      <mat-icon>cleaning_services</mat-icon>
+      Limpiar
+    </button>
+  </div>
+
+</form>

@@ -1,0 +1,14 @@
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.submit-btn {
+  flex: 1;
+}

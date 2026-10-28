@@ -1,0 +1,28 @@
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th, td {
+  white-space: nowrap;
+}
+
+.mat-column-description {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions-cell {
+  width: 100px;
+  text-align: center;
+}
+
+.empty-cell {
+  text-align: center;
+  padding: 32px 16px;
+  color: #5f6368;
+}
