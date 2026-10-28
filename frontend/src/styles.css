@@ -1,0 +1,27 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5;
+}
+
+table {
+  width: 100%;
+}
+
+.snackbar-success .mdc-snackbar__surface {
+  background-color: #2e7d32 !important;
+}
+
+.snackbar-error .mdc-snackbar__surface {
+  background-color: #c62828 !important;
+}
+
+.snackbar-success .mdc-snackbar__label,
+.snackbar-success .mat-mdc-button,
+.snackbar-error .mdc-snackbar__label,
+.snackbar-error .mat-mdc-button {
+  color: #ffffff !important;
+}

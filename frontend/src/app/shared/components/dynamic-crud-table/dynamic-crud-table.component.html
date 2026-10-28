@@ -1,0 +1,50 @@
+<div class="table-container">
+  <table mat-table [dataSource]="data">
+
+    <ng-container *ngFor="let col of columns" [matColumnDef]="col.key">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ col.header }}
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let row"
+        [matTooltip]="col.key === 'description' ? row[col.key] : ''"
+      >
+        @switch (col.type) {
+          @case ('badge') {
+            <mat-chip>{{ row[col.key] }}</mat-chip>
+          }
+          @case ('date') {
+            {{ row[col.key] | date:'dd/MM/yyyy HH:mm:ss' }}
+          }
+          @default {
+            {{ row[col.key] }}
+          }
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="actions-cell">Acciones</th>
+      <td mat-cell *matCellDef="let row" class="actions-cell">
+        <button mat-icon-button color="primary" *ngIf="canEdit" (click)="edit.emit(row)" aria-label="Editar registro">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" *ngIf="canDelete" (click)="delete.emit(row)" aria-label="Eliminar registro">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr *matNoDataRow>
+      <td class="empty-cell" [attr.colspan]="displayedColumns.length">
+        <mat-icon>inbox</mat-icon>
+        <p>{{ emptyMessage }}</p>
+      </td>
+    </tr>
+
+  </table>
+</div>
